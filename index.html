@@ -8,10 +8,12 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
     }
     .jumbotron {
       background: #007bff;
       color: white;
+      margin-bottom: 0;
     }
     .special-offer {
       background: #f8f9fa;
@@ -20,10 +22,20 @@
       margin-top: 20px;
       text-align: center;
     }
+    section {
+      padding: 60px 0;
+    }
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 10px 0;
+      position: relative;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">Mock Interview Service</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -49,13 +61,13 @@
     </div>
   </nav>
 
-  <div class="jumbotron text-center">
+  <header class="jumbotron text-center">
     <h1 class="display-4">Ace Your Next Interview with Confidence!</h1>
     <p class="lead">Our Mock Interview Service is designed to help you gain confidence and improve your performance in any interview setting.</p>
     <a class="btn btn-primary btn-lg" href="#contact" role="button">Get Started Now</a>
-  </div>
+  </header>
 
-  <div class="container">
+  <main class="container">
     <section id="about" class="my-5">
       <h2>About Me</h2>
       <p>With years of experience as a hiring manager in both large and small companies, I bring insider knowledge of what employers are looking for. As a father of three teens and a seasoned coach for boys' and girls' teams in elementary, middle, and high school (baseball, basketball, soccer, and volleyball), I understand the unique challenges and strengths of young adults. My coaching experience has honed my ability to mentor and guide individuals towards achieving their full potential.</p>
@@ -105,9 +117,9 @@
       <h3>Special Offer</h3>
       <p>Book your first session and get 20% off!</p>
     </section>
-  </div>
+  </main>
 
-  <footer class="bg-dark text-white text-center py-3">
+  <footer class="text-center">
     &copy; 2024 Mock Interview Service. All rights reserved.
   </footer>
 
