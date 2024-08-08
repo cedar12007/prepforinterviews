@@ -1802,27 +1802,13 @@ input, select, textarea {
 /* Box */
 
 	.box {
-		border-radius: 8px;
+		border-radius: 50px;
 		border: solid;
-		margin-bottom: 2em;
-		padding: 1.5em;
+		text-align: center;
+		background-color: #faf8f8;
+
 	}
 
-		.box > :last-child,
-		.box > :last-child > :last-child,
-		.box > :last-child > :last-child > :last-child {
-			margin-bottom: 0;
-		}
-
-		.box.alt {
-			border: 0;
-			border-radius: 0;
-			padding: 0;
-		}
-
-	.box {
-		border-color: rgba(255, 255, 255, 0.35);
-	}
 
 /* Button */
 
@@ -2814,7 +2800,7 @@ input, select, textarea {
 	}
 
 		.features li {
-			width: calc(33.33333% - 2em);
+			width: 18em;
 			margin-left: 2em;
 			margin-top: 3em;
 			padding: 0;
