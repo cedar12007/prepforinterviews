@@ -194,6 +194,10 @@
 								<button type="submit">Submit</button>
 							</form>
 
+
+							<!-- Include the reCAPTCHA Enterprise v3 script -->
+							<script src="https://www.google.com/recaptcha/enterprise.js?render=your-site-key"></script>
+
 							<script>
 								const form = document.getElementById("contactForm");
 
@@ -206,39 +210,29 @@
 										return;
 									}
 
-									// Execute reCAPTCHA with the site key (ID)
+									// Wait for the reCAPTCHA to be ready
 									grecaptcha.ready(function() {
-										grecaptcha.execute('6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx', { action: 'submit' }).then(function(token) {
-											// Add the token to the form data and submit the form
-											const formData = new FormData(document.getElementById('contactForm'));
-											formData.append('captcha', token); // Add reCAPTCHA response token
+										// Automatically execute reCAPTCHA when the page is ready
+										grecaptcha.execute('6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx', {action: 'homepage'}).then(function(token) {
+											// Pass the token to your server for verification
+											document.getElementById('contactForm').addEventListener('submit', function(e) {
+												e.preventDefault();  // Prevent form from submitting
 
-											// Send the form data including the CAPTCHA token to the backend
-											//fetch('http://127.0.0.1:5000/validate-captcha', {
-											fetch('https://prepforinterviews.vercel.app/validate-captcha', {
-												method: 'POST',
-												headers: {
-													'Content-Type': 'application/json'
-												},
-												body: JSON.stringify({
-													name: formData.get('name'),
-													email: formData.get('email'),
-													message: formData.get('message'),
-													captcha: token
-												})
-											})
-											.then(response => response.json())
-											.then(result => {
-												if (result.success) {
-													alert("Form submitted successfully!");
-												} else {
-													alert("Failed to verify CAPTCHA.");
-												}
-											})
-											.catch(error => alert("Error submitting form: " + error));
+												// Send the token to the server
+												fetch('/verify-captcha', {
+													method: 'POST',
+													body: JSON.stringify({token: token}),
+													headers: {'Content-Type': 'application/json'}
+												}).then(response => {
+													if (response.ok) {
+														alert('reCAPTCHA verified');
+													} else {
+														alert('Verification failed');
+													}
+												});
+											});
 										});
 									});
-								});
 
 							</script>
 						</header>
