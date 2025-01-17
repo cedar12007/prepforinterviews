@@ -33,40 +33,30 @@ def after_request(response):
     return response
 
 # Replace with your reCAPTCHA secret key
-#RECAPTCHA_SECRET_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
-RECAPTCHA_SECRET_KEY = "6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"
+RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
 
 @app.route('/validate-captcha', methods=['POST'])
 def validate_captcha():
     print("request: " + str(request.get_json()))
 
-    # Ensure the request Content-Type is JSON
-    if not request.is_json:
-        return jsonify({"success": False, "message": "Invalid Content-Type. Expected 'application/json'."}), 400
+    data = request.json
+    recaptcha_response = data.get("g-recaptcha-response")
 
-    data = request.get_json()
-    print("request: " + str(data))
-    captcha_token = data.get('captcha')
-    if not captcha_token:
-        return jsonify({"success": False, "message": "CAPTCHA token is missing."}), 400
+    # Verify reCAPTCHA response
+    response = requests.post(
+        "https://www.google.com/recaptcha/api/siteverify",
+        data={
+            "secret": RECAPTCHA_SECRET_KEY,
+            "response": recaptcha_response,
+        },
+    )
+    result = response.json()
 
-        # Get the reCAPTCHA token from the form submission
-        recaptcha_response = request.form.get('g-recaptcha-response')
-
-        # Verify the reCAPTCHA token with Google's API
-        verification_url = 'https://www.google.com/recaptcha/api/siteverify'
-        verification_payload = {
-            'secret': RECAPTCHA_SECRET_KEY,
-            'response': recaptcha_response
-        }
-        response = requests.post(verification_url, data=verification_payload)
-        result = response.json()
-
-        # Check if reCAPTCHA validation succeeded
-        if result.get('success'):
-            return jsonify(message='reCAPTCHA verified successfully!'), 200
-        else:
-            return jsonify(message='reCAPTCHA verification failed.'), 400
+    if result.get("success") and result.get("score", 0) >= 0.5:  # Check score for v3
+        # Process form data here
+        return jsonify({"success": True, "message": "CAPTCHA validation successful."})
+    else:
+        return jsonify({"success": False, "message": "CAPTCHA validation failed."}), 400
 
 
 if __name__ == '__main__':
