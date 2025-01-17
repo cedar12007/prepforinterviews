@@ -35,6 +35,8 @@ def validate_captcha():
     )
     result = response.json()
 
+    print("results: " + str(result))
+
     if result.get("success"):
         # Send an email with the form data
         try:
