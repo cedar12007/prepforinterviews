@@ -1,9 +1,16 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
+import os
 
 import requests
 #from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+
+@app.route('/')
+def serve_html():
+    # Serve the index.html file directly from the root directory
+    return send_from_directory(os.getcwd(), 'index.html')
+
 #CORS(app)  # Enable CORS for the whole app
 # Enable CORS for the entire app
 #CORS(app, origins=["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/", "https://www.prepforinterview.com/"])  # Allow specific origin(s)
