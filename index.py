@@ -19,27 +19,31 @@ def validate_captcha():
     if not request.is_json:
         return jsonify({"success": False, "message": "Invalid Content-Type. Expected 'application/json'."}), 400
 
-    print("request: " + str(request.get_json()))
-    # Parse the JSON data
     data = request.get_json()
-    captcha_response = data.get('captcha')
+    print("request: " + str(data))
+    captcha_token = data.get('captcha')
+    if not captcha_token:
+        return jsonify({"success": False, "message": "CAPTCHA token is missing."}), 400
 
-    if not captcha_response:
-        return jsonify({"success": False, "message": "CAPTCHA response is missing."}), 400
+    # Define your Site Key (ID) and Secret Key
+    site_key = "6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHxe"  # The same key used on the frontend
+    secret_key = "6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"  # reCAPTCHA v3 uses the Site Key for both frontend and backend
 
-    # Verify CAPTCHA with Google
-    verify_url = "https://www.google.com/recaptcha/api/siteverify"
+    # Verify the CAPTCHA response with Google's reCAPTCHA API
     payload = {
-        'secret': RECAPTCHA_SECRET_KEY,
-        'response': captcha_response
+        'secret': secret_key,
+        'response': captcha_token
     }
+    verify_url = "https://www.google.com/recaptcha/api/siteverify"
     response = requests.post(verify_url, data=payload)
     result = response.json()
 
-    if result.get("success"):
+    # Check if the CAPTCHA was successfully verified
+    if result['success']:
         return jsonify({"success": True, "message": "CAPTCHA passed!"})
     else:
         return jsonify({"success": False, "message": "CAPTCHA verification failed."}), 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)
