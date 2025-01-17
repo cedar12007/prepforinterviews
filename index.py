@@ -10,7 +10,6 @@ app = Flask(__name__)
 # Define the allowed origins
 allowed_origins = ["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/", "https://www.prepforinterview.com/"]
 
-
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin')
