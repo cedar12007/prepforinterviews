@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_session import Session
-import redis
+from upstash_redis import Redis
 import time
 
 
@@ -21,12 +21,14 @@ RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
 GMAIL_USER = os.getenv("doar_ktovet")
 GMAIL_PASSWORD = os.getenv("doar_sisma")
 
+REDIS_TOKEN = os.getenv("redis_token")
+
 # Configure Redis session management
 app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-app.config["SESSION_REDIS"] = redis.StrictRedis(host="tops-sparrow-26652.upstash.io", port=6379, db=0)  # Update with your Redis server details
+app.config["SESSION_REDIS"] = Redis(url="https://tops-sparrow-26652.upstash.io", token=REDIS_TOKEN) # Update with your Redis server details
 
 # Initialize Flask-Session extension
 Session(app)
