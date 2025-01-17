@@ -11,6 +11,8 @@ import verify_recaptcha
 
 app = Flask(__name__)
 
+app.secret_key = os.getenv("mafteah_sod")
+
 CORS(app, resources={r"/validate-captcha": {"origins": "https://www.prepforinterviews.com"}})
 
 RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
