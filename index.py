@@ -1,54 +1,23 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS library
 import requests
 import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import time
 
 import verify_recaptcha
 
 app = Flask(__name__)
-
-app.secret_key = os.getenv("mafteah_sod")
 
 CORS(app, resources={r"/validate-captcha": {"origins": "https://www.prepforinterviews.com"}})
 
 RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
 GMAIL_USER = os.getenv("doar_ktovet")
 GMAIL_PASSWORD = os.getenv("doar_sisma")
-# Maximum allowed submissions per IP within the time window
-MAX_SUBMISSIONS = 3
-TIME_WINDOW = 60 * 5  # 5 minutes in seconds
 
 @app.route("/validate-captcha", methods=["POST"])
 def validate_captcha():
-    ip_address = request.remote_addr  # Get the user's IP address
-    print("ip_address: " + str(ip_address))
-    # Track submissions per session
-    if ip_address not in session:
-        session[ip_address] = {"count": 0, "timestamp": time.time()}
-        print("session ip_address count " + str(session[ip_address]))
-
-    current_time = time.time()
-    time_elapsed = current_time - session[ip_address]["timestamp"]
-    print("time elapsed: " + str(time_elapsed) )
-
-    # Reset the count if the time window has passed
-    if time_elapsed > TIME_WINDOW:
-        session[ip_address]["count"] = 0
-        session[ip_address]["timestamp"] = current_time
-
-    # Check if the IP has exceeded the submission limit
-    if session[ip_address]["count"] >= MAX_SUBMISSIONS:
-        return jsonify({"success": False, "message": "Too many submissions."}), 429
-
-    # Increment the submission count for this IP address
-    session[ip_address]["count"] += 1
-
-    print("incrementing count to: " + str(session[ip_address]["count"]))
-
     data = request.json
     name = data.get("name")
     email = data.get("email")
