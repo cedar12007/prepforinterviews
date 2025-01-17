@@ -23,7 +23,7 @@ def validate_captcha():
     email = data.get("email")
     message = data.get("message")
     recaptcha_response = data.get("g-recaptcha-response")
-    recaptcha_metadata = verify_recaptcha.verify_recaptcha(recaptcha_response)
+    #recaptcha_metadata = verify_recaptcha.verify_recaptcha(recaptcha_response)
 
     # Verify reCAPTCHA response
     response = requests.post(
@@ -40,7 +40,7 @@ def validate_captcha():
     if result.get("success"):
         # Send an email with the form data
         try:
-            send_email(name, email, message, recaptcha_response, recaptcha_metadata)
+            send_email(name, email, message, recaptcha_response)
             return jsonify({"success": True, "message": "CAPTCHA validation and email successful."})
         except Exception as e:
             print(f"Error sending email: {e}")
@@ -51,7 +51,7 @@ def validate_captcha():
 
 
 
-def send_email(name, email, message, recaptcha_response, recaptcha_metadata):
+def send_email(name, email, message, recaptcha_response):
     """
     Sends an email containing the form data and reCAPTCHA response.
     """
@@ -66,9 +66,6 @@ def send_email(name, email, message, recaptcha_response, recaptcha_metadata):
 
     reCAPTCHA Response:
     {recaptcha_response}
-    
-    reCAPTCHA Metadta:
-    {recaptcha_metadata}
     """
 
     # Set up the email message
