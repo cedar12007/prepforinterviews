@@ -27,9 +27,11 @@ REDIS_PORT = os.getenv("redis_port")
 
 
 redis_client = Redis(
-    url="https://tops-sparrow-26652.upstash.io",  # Replace with your Upstash Redis URL
+    url=REDIS_URL,  # Replace with your Upstash Redis URL
     token=REDIS_TOKEN             # Replace with your Upstash token
 )
+
+print("redis_client: " + str(redis_client))
 
 # Configure Redis session management
 app.config["SESSION_TYPE"] = "redis"
