@@ -64,7 +64,7 @@ def validate_captcha():
         return jsonify({"success": False, "message": "Rate limit exceeded. Please try again later."}), 429
 
     # Increment the submission count for this IP address
-    Session[ip_address]["count"] += 1
+    session[ip_address]["count"] += 1
 
     # Verify reCAPTCHA response
     response = requests.post(
