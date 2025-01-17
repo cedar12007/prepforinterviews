@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS  # Import CORS library
 import requests
 import os
@@ -9,9 +9,11 @@ from flask_session import Session
 import redis
 import time
 
-import verify_recaptcha
 
 app = Flask(__name__)
+
+app.secret_key = os.getenv("mafteah_sod")
+
 
 CORS(app, resources={r"/validate-captcha": {"origins": "https://www.prepforinterviews.com"}})
 
@@ -46,22 +48,22 @@ def validate_captcha():
     recaptcha_response = request.json.get("g-recaptcha-response")
 
     # Track submissions per session
-    if ip_address not in Session:
-        Session[ip_address] = {"count": 0, "timestamp": time.time()}
+    if ip_address not in session:
+        session[ip_address] = {"count": 0, "timestamp": time.time()}
 
     current_time = time.time()
-    time_elapsed = current_time - Session[ip_address]["timestamp"]
+    time_elapsed = current_time - session[ip_address]["timestamp"]
 
     # Reset the count if the time window has passed
     if time_elapsed > TIME_WINDOW:
-        Session[ip_address]["count"] = 0
-        Session[ip_address]["timestamp"] = current_time
+        session[ip_address]["count"] = 0
+        session[ip_address]["timestamp"] = current_time
 
     # Check if the IP has exceeded the submission limit
-    if Session[ip_address]["count"] >= MAX_SUBMISSIONS:
+    if session[ip_address]["count"] >= MAX_SUBMISSIONS:
         return jsonify({"success": False, "message": "Rate limit exceeded. Please try again later."}), 429
 
-     # Increment the submission count for this IP address
+    # Increment the submission count for this IP address
     Session[ip_address]["count"] += 1
 
     # Verify reCAPTCHA response
