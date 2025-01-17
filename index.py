@@ -3,7 +3,8 @@ from flask_cors import CORS  # Import CORS library
 import requests
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+
+CORS(app, resources={r"/validate-captcha": {"origins": "https://www.prepforinterviews.com"}})
 
 RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
 
