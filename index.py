@@ -1,12 +1,30 @@
 from flask import Flask, request, jsonify
 
 import requests
-from flask_cors import CORS  # Import CORS
+#from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
 #CORS(app)  # Enable CORS for the whole app
 # Enable CORS for the entire app
-CORS(app, origins=["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/", "https://www.prepforinterview.com/"])  # Allow specific origin(s)
+#CORS(app, origins=["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/", "https://www.prepforinterview.com/"])  # Allow specific origin(s)
+# Define the allowed origins
+allowed_origins = ["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/", "https://www.prepforinterview.com/"]
+
+
+@app.after_request
+def after_request(response):
+    origin = request.headers.get('Origin')
+
+    if origin in allowed_origins:
+        response.headers['Access-Control-Allow-Origin'] = origin
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+
+    # Handle OPTIONS request (pre-flight request)
+    if request.method == 'OPTIONS':
+        response.status_code = 200
+    return response
 
 # Replace with your reCAPTCHA secret key
 #RECAPTCHA_SECRET_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
