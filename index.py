@@ -6,7 +6,7 @@ from flask_cors import CORS  # Import CORS
 app = Flask(__name__)
 #CORS(app)  # Enable CORS for the whole app
 # Enable CORS for the entire app
-CORS(app, origins=["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/, https://www.prepforinterview.com/"])  # Allow specific origin(s)
+CORS(app, origins=["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:63342/", "https://www.prepforinterview.com/"])  # Allow specific origin(s)
 
 # Replace with your reCAPTCHA secret key
 #RECAPTCHA_SECRET_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
