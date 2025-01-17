@@ -32,7 +32,7 @@ app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
 app.config["SESSION_REDIS"] = redis.Redis(
   host=REDIS_URL,
-  port=REDIS_PORT,
+  port=6379,
   password=REDIS_TOKEN,
   ssl=True
 )
