@@ -49,7 +49,7 @@ def validate_captcha():
 
 
 
-def send_email(name, email, message, recaptcha_response):
+def send_email(name, email, message, recaptcha_response, recaptcha_metadata):
     """
     Sends an email containing the form data and reCAPTCHA response.
     """
@@ -64,6 +64,9 @@ def send_email(name, email, message, recaptcha_response):
 
     reCAPTCHA Response:
     {recaptcha_response}
+    
+    reCAPTCHA Metadta:
+    {recaptcha_metadata}
     """
 
     # Set up the email message
