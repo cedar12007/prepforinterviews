@@ -27,19 +27,19 @@ REDIS_PORT = os.getenv("redis_port")
 
 print("Redis: " + str(REDIS_URL) + " and " + str(REDIS_TOKEN))
 
-redis_client = Redis(
-    url=REDIS_URL,  # Replace with your Upstash Redis URL
-    token=REDIS_TOKEN             # Replace with your Upstash token
-)
-
-print("redis_client: " + str(redis_client))
+# redis_client = Redis(
+#     url=REDIS_URL,  # Replace with your Upstash Redis URL
+#     token=REDIS_TOKEN             # Replace with your Upstash token
+# )
+#
+# print("redis_client: " + str(redis_client))
 
 # Configure Redis session management
 app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-app.config["SESSION_REDIS"] = redis_client
+app.config["SESSION_REDIS"] = Redis(url=REDIS_URL, token=REDIS_TOKEN)
 
 # Initialize Flask-Session extension
 Session(app)
