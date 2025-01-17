@@ -222,7 +222,7 @@
 												e.preventDefault();  // Prevent form from submitting
 
 												// Send the token to the server
-												fetch('https://prepforinterviews.vercel.app/verify-captcha', {
+												fetch('https://prepforinterviews.vercel.app/validate_captcha', {
 													method: 'POST',
 													body: JSON.stringify({token: token}),
 													headers: {'Content-Type': 'application/json'}
