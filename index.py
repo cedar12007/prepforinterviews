@@ -42,7 +42,12 @@ def validate_captcha():
 
     # Check if the IP has exceeded the submission limit
     if session[ip_address]["count"] >= MAX_SUBMISSIONS:
-        return jsonify({"success": False, "message": "Rate limit exceeded. Please try again later."}), 429
+        return jsonify({"success": False, "message": "Too many submissions."}), 429
+
+    # Increment the submission count for this IP address
+    session[ip_address]["count"] += 1
+
+    print("incrementing count to: " + str(session[ip_address]["count"]))
 
     data = request.json
     name = data.get("name")
@@ -60,9 +65,6 @@ def validate_captcha():
         },
     )
     result = response.json()
-
-    # Increment the submission count for this IP address
-    session[ip_address]["count"] += 1
 
     print("results: " + str(result))
 
