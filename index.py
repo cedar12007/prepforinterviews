@@ -25,6 +25,7 @@ TIME_WINDOW = 60 * 5  # 5 minutes in seconds
 @app.route("/validate-captcha", methods=["POST"])
 def validate_captcha():
     ip_address = request.remote_addr  # Get the user's IP address
+    print("ip_address: " + str(ip_address))
     # Track submissions per session
     if ip_address not in session:
         session[ip_address] = {"count": 0, "timestamp": time.time()}
