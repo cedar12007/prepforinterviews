@@ -208,7 +208,7 @@
 
 									// Execute reCAPTCHA with the site key (ID)
 									grecaptcha.ready(function() {
-										grecaptcha.execute('your-site-key-here', { action: 'submit' }).then(function(token) {
+										grecaptcha.execute('6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx', { action: 'submit' }).then(function(token) {
 											// Add the token to the form data and submit the form
 											const formData = new FormData(document.getElementById('contactForm'));
 											formData.append('captcha', token); // Add reCAPTCHA response token
