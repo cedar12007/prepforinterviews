@@ -178,7 +178,7 @@
 
 						<header class="major">
 							<!-- <form action="http://127.0.0.1:5000/validate-captcha" method="post" id="contactform">  -->
-								<form action="https://prepforinterviews.vercel.app/validate-captcha" method="post" id="contactform">
+								<form action="https://prepforinterviews.vercel.app/validate-captcha" method="post" id="contactForm">
 
 								<label for="name">Name</label>
 								<input type="text" id="name" name="name" required>
@@ -210,6 +210,9 @@
 										return;
 									}
 
+									// Continue with form submission or further processing
+
+
 									// Wait for the reCAPTCHA to be ready
 									grecaptcha.ready(function() {
 										// Automatically execute reCAPTCHA when the page is ready
@@ -233,6 +236,8 @@
 											});
 										});
 									});
+								});
+
 
 							</script>
 						</header>
