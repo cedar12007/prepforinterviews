@@ -29,6 +29,9 @@
 		 <meta name="twitter:title" content="Interview Prep Services | Land Your Dream Job">
 		 <meta name="twitter:description" content="Expert 1:1 interview coaching to help you stand out and succeed.">
 		 <meta name="twitter:image" content="https://www.prepforinterviews.com/images/prepforinterviews.jpg"><!-- Replace with a promotional image URL -->
+
+		 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		 <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"></script>
 	</head>
 
 			
@@ -172,7 +175,64 @@
 								<BR>
 								<B>Phone:</B> 571-234-1432</a>
 						</P>
+
+						<header class="major">
+							<form action="http://127.0.0.1:5000/validate-captcha" method="POST" id="contactForm">
+								
+								<label for="name">Name</label>
+								<input type="text" id="name" name="name" required>
+				
+								<label for="email">Email</label>
+								<input type="email" id="email" name="email" required>
+				
+								<label for="message">Message</label>
+								<textarea id="message" name="message" rows="5" required></textarea>
+				
+								<div class="g-recaptcha" data-sitekey="6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"></div>
+								
+								<button type="submit">Submit</button>
+							</form>
+
+							<script>
+								const form = document.getElementById("contactForm");
+
+								form.addEventListener("submit", async (e) => {
+									e.preventDefault();
+
+									const captcha = grecaptcha.getResponse(); // Get CAPTCHA response
+									if (!captcha) {
+										alert("Please complete the CAPTCHA.");
+										return;
+									}
+
+									// Make the POST request
+									//const response = await fetch("http://127.0.0.1:5000/validate-captcha", { // Update to your backend URL
+									const response = await fetch("https://prepforinterviews.vercel.app/validate-captcha", { // Update to your backend URL
+										method: "POST",
+										headers: {
+											"Content-Type": "application/json", // Ensure the correct header is set
+										},
+										body: JSON.stringify({
+											name: form.name.value,
+											email: form.email.value,
+											message: form.message.value,
+											captcha: captcha,
+										}),
+									});
+
+									const result = await response.json();
+									if (response.ok) {
+										alert("Form submitted successfully!");
+									} else {
+										alert(result.message || "Error submitting the form.");
+									}
+								});
+
+							</script>
+						</header>
 						</section>
+
+						
 
 					</div>
 
