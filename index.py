@@ -15,9 +15,29 @@ CORS(app, resources={r"/validate-captcha": {"origins": "https://www.prepforinter
 RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
 GMAIL_USER = os.getenv("doar_ktovet")
 GMAIL_PASSWORD = os.getenv("doar_sisma")
+# Maximum allowed submissions per IP within the time window
+MAX_SUBMISSIONS = 3
+TIME_WINDOW = 60 * 5  # 5 minutes in seconds
 
 @app.route("/validate-captcha", methods=["POST"])
 def validate_captcha():
+    ip_address = request.remote_addr  # Get the user's IP address
+    # Track submissions per session
+    if ip_address not in session:
+        session[ip_address] = {"count": 0, "timestamp": time.time()}
+
+    current_time = time.time()
+    time_elapsed = current_time - session[ip_address]["timestamp"]
+
+    # Reset the count if the time window has passed
+    if time_elapsed > TIME_WINDOW:
+        session[ip_address]["count"] = 0
+        session[ip_address]["timestamp"] = current_time
+
+    # Check if the IP has exceeded the submission limit
+    if session[ip_address]["count"] >= MAX_SUBMISSIONS:
+        return jsonify({"success": False, "message": "Rate limit exceeded. Please try again later."}), 429
+
     data = request.json
     name = data.get("name")
     email = data.get("email")
@@ -34,6 +54,9 @@ def validate_captcha():
         },
     )
     result = response.json()
+
+    # Increment the submission count for this IP address
+    session[ip_address]["count"] += 1
 
     print("results: " + str(result))
 
