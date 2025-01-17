@@ -25,6 +25,7 @@ REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
 
+print("Redis: " + str(REDIS_URL) + " and " + str(REDIS_TOKEN))
 
 redis_client = Redis(
     url=REDIS_URL,  # Replace with your Upstash Redis URL
