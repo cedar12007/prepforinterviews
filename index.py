@@ -28,9 +28,11 @@ def validate_captcha():
     # Track submissions per session
     if ip_address not in session:
         session[ip_address] = {"count": 0, "timestamp": time.time()}
+        print("session ip_address count " + str(session[ip_address]))
 
     current_time = time.time()
     time_elapsed = current_time - session[ip_address]["timestamp"]
+    print("time elapsed: " + str(time_elapsed) )
 
     # Reset the count if the time window has passed
     if time_elapsed > TIME_WINDOW:
