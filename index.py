@@ -25,6 +25,7 @@ REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
 
+
 # Configure Redis session management
 app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
