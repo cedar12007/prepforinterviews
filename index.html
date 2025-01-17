@@ -191,14 +191,31 @@
 				
 								<div class="g-recaptcha" data-sitekey="6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"></div>
 
-								<button type="submit">Submit</button>
+								<!-- Invisible reCAPTCHA v2 -->
+								<button
+									class="g-recaptcha"
+									data-sitekey="6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"
+									data-callback="onSubmit"
+									data-action="submit">
+									Submit
+								</button>
 							</form>
 
 
-							<!-- Include the reCAPTCHA Enterprise v3 script -->
+							<!-- Include the reCAPTCHA Enterprise v3 script
 							<script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf0zrkqAAAAAGqtAf-HyJn27SDi-v9lbKLk_XHx"></script>
+							-->
+
+							<!-- Load the reCAPTCHA v2 Invisible library -->
+							<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 							<script>
+
+							// Callback function when reCAPTCHA validation is successful
+							function onSubmit(token) {
+								// Optionally alert success and submit the form
+								document.getElementById("contactForm").submit();
+							}
 							// Get the form element
 							const form = document.getElementById('contactForm');
 
