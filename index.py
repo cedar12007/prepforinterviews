@@ -6,6 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_session import Session
+import pickle
 from upstash_redis import Redis
 import time
 import datetime
@@ -48,6 +49,9 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
 app.config["SESSION_REDIS"] = redis_instance
+
+# Ensure Pickle is used as the session serializer (handles binary data)
+app.session_interface.serializer = pickle
 
 # Initialize Flask-Session extension
 Session(app)
