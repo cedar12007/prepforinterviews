@@ -152,29 +152,24 @@ class PatchedRedisSessionInterface(RedisSessionInterface):
         if not session.modified:
             return
 
-        # Get expiration time
         expiration_time = self.get_expiration_time(app, session)
 
-        # Ensure expiration_time is a timedelta or calculate from datetime
         if expiration_time is None:
             total_seconds = 86400  # Default to 1 day (in seconds)
         elif isinstance(expiration_time, datetime.datetime):
-            # Handle offset-aware vs offset-naive datetime objects
             if expiration_time.tzinfo is not None:
                 expiration_time = expiration_time.replace(tzinfo=None)
             current_time = datetime.datetime.utcnow()
             total_seconds = (expiration_time - current_time).total_seconds()
         else:
-            # Assume expiration_time is already a timedelta
             total_seconds = expiration_time.total_seconds()
 
-        # Ensure total_seconds is positive
         total_seconds = max(0, int(total_seconds))
 
         # Serialize session data
         val = self.serializer.dumps(dict(session))
 
-        # Store binary data directly in Redis
+        # Correctly call setex with positional arguments
         self.redis.setex(self.key_prefix + session.sid, total_seconds, val)
 
 # Configure the app to use the patched Redis session interface
