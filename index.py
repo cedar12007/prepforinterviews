@@ -9,6 +9,8 @@ from flask_session import Session
 from upstash_redis import Redis
 import time
 
+from flask_session.sessions import RedisSessionInterface #monkey patch
+
 
 app = Flask(__name__)
 
@@ -25,6 +27,11 @@ REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
 
+redis_instance = Redis(url=REDIS_URL, token=REDIS_TOKEN)
+# Key prefix for session keys
+key_prefix = "flask_session:"
+
+
 print("Redis: " + str(REDIS_URL) + " and " + str(REDIS_TOKEN))
 
 # redis_client = Redis(
@@ -39,7 +46,7 @@ app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-app.config["SESSION_REDIS"] = Redis(url=REDIS_URL, token=REDIS_TOKEN)
+app.config["SESSION_REDIS"] = redis_instance
 
 # Initialize Flask-Session extension
 Session(app)
@@ -135,6 +142,26 @@ def send_email(name, email, message, recaptcha_response):
         server.login(GMAIL_USER, GMAIL_PASSWORD)  # Login to Gmail
         server.sendmail(GMAIL_USER, GMAIL_USER, msg.as_string())  # Send email
 
+#Monkey Patch Flask-Session: If you don't want to modify the library code directly, you can apply a monkey patch in your Flask app:
+
+class PatchedRedisSessionInterface(RedisSessionInterface):
+    def save_session(self, app, session, response):
+        if not session:
+            self.redis.delete(self.key_prefix + session.sid)
+            return
+        if not session.modified:
+            return
+        total_seconds = self.get_expiration_time(app, session)
+        if total_seconds is None:
+            total_seconds = 86400  # Default to 1 day
+        else:
+            total_seconds = total_seconds.total_seconds()
+        val = self.serializer.dumps(dict(session))
+        # Use the corrected `setex` method
+        self.redis.setex(self.key_prefix + session.sid, int(total_seconds), val)
+
+# Configure the app to use the patched Redis session interface
+app.session_interface = PatchedRedisSessionInterface(redis_instance, key_prefix)
 
 if __name__ == "__main__":
     app.run(debug=True)
