@@ -174,11 +174,7 @@ class PatchedRedisSessionInterface(RedisSessionInterface):
         # Serialize session data
         val = self.serializer.dumps(dict(session))
 
-        # Decode bytes to a string (UTF-8) for JSON serialization compatibility
-        if isinstance(val, bytes):
-            val = val.decode("utf-8")
-
-        # Use corrected setex method
+        # Store binary data directly in Redis
         self.redis.setex(self.key_prefix + session.sid, total_seconds, val)
 
 # Configure the app to use the patched Redis session interface
