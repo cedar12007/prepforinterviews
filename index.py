@@ -6,12 +6,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_session import Session
-import pickle
 from upstash_redis import Redis
 import time
-import datetime
-
-from flask_session.sessions import RedisSessionInterface #monkey patch
 
 
 app = Flask(__name__)
@@ -29,11 +25,6 @@ REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
 
-redis_instance = Redis(url=REDIS_URL, token=REDIS_TOKEN)
-# Key prefix for session keys
-key_prefix = "flask_session:"
-
-
 print("Redis: " + str(REDIS_URL) + " and " + str(REDIS_TOKEN))
 
 # redis_client = Redis(
@@ -48,10 +39,7 @@ app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-app.config["SESSION_REDIS"] = redis_instance
-
-# Ensure Pickle is used as the session serializer (handles binary data)
-app.session_interface.serializer = pickle
+app.config["SESSION_REDIS"] = Redis(url=REDIS_URL, token=REDIS_TOKEN)
 
 # Initialize Flask-Session extension
 Session(app)
@@ -147,40 +135,6 @@ def send_email(name, email, message, recaptcha_response):
         server.login(GMAIL_USER, GMAIL_PASSWORD)  # Login to Gmail
         server.sendmail(GMAIL_USER, GMAIL_USER, msg.as_string())  # Send email
 
-#Monkey Patch Flask-Session: If you don't want to modify the library code directly, you can apply a monkey patch in your Flask app:
-class PatchedRedisSessionInterface(RedisSessionInterface):
-    def save_session(self, app, session, response):
-        if not session:
-            self.redis.delete(self.key_prefix + session.sid)
-            return
-        if not session.modified:
-            return
-
-        # Get expiration time
-        expiration_time = self.get_expiration_time(app, session)
-
-        if expiration_time is None:
-            total_seconds = 86400  # Default to 1 day (in seconds)
-        elif isinstance(expiration_time, datetime.datetime):
-            if expiration_time.tzinfo is not None:
-                expiration_time = expiration_time.replace(tzinfo=None)
-            current_time = datetime.datetime.utcnow()
-            total_seconds = (expiration_time - current_time).total_seconds()
-        else:
-            total_seconds = expiration_time.total_seconds()
-
-        total_seconds = max(0, int(total_seconds))
-
-        # Serialize session data as bytes (keep it as bytes)
-        val = self.serializer.dumps(dict(session))
-
-        print(f"Data being sent to Redis: {val}")
-
-        # Directly store the binary data (bytes) in Redis without JSON encoding
-        self.redis.setex(self.key_prefix + session.sid, total_seconds, val)
-
-# Configure the app to use the patched Redis session interface
-app.session_interface = PatchedRedisSessionInterface(redis_instance, key_prefix)
 
 if __name__ == "__main__":
     app.run(debug=True)
