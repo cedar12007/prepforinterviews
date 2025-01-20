@@ -167,13 +167,12 @@ class PatchedRedisSessionInterface(RedisSessionInterface):
 
         total_seconds = max(0, int(total_seconds))
 
-        # Serialize session data as bytes (avoid JSON serialization)
+        # Serialize session data as bytes (keep it as bytes)
         val = self.serializer.dumps(dict(session))
 
-        print(f"Serialized Value Type: {type(val)}")
-        print(f"Serialized Value: {val}")
+        print(f"Data being sent to Redis: {val}")
 
-        # Directly store bytes in Redis without converting to JSON
+        # Directly store the binary data (bytes) in Redis without JSON encoding
         self.redis.setex(self.key_prefix + session.sid, total_seconds, val)
 
 # Configure the app to use the patched Redis session interface
