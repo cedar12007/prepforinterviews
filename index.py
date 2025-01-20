@@ -8,6 +8,7 @@ from email.mime.multipart import MIMEMultipart
 from flask_session import Session
 from upstash_redis import Redis
 import time
+import datetime
 
 from flask_session.sessions import RedisSessionInterface #monkey patch
 
@@ -143,7 +144,6 @@ def send_email(name, email, message, recaptcha_response):
         server.sendmail(GMAIL_USER, GMAIL_USER, msg.as_string())  # Send email
 
 #Monkey Patch Flask-Session: If you don't want to modify the library code directly, you can apply a monkey patch in your Flask app:
-
 class PatchedRedisSessionInterface(RedisSessionInterface):
     def save_session(self, app, session, response):
         if not session:
@@ -151,14 +151,28 @@ class PatchedRedisSessionInterface(RedisSessionInterface):
             return
         if not session.modified:
             return
-        total_seconds = self.get_expiration_time(app, session)
-        if total_seconds is None:
-            total_seconds = 86400  # Default to 1 day
+
+        # Get expiration time
+        expiration_time = self.get_expiration_time(app, session)
+
+        # Ensure expiration_time is a timedelta, and calculate seconds
+        if expiration_time is None:
+            total_seconds = 86400  # Default to 1 day (in seconds)
+        elif isinstance(expiration_time, datetime.datetime):
+            # Convert datetime to timedelta
+            total_seconds = (expiration_time - datetime.datetime.utcnow()).total_seconds()
         else:
-            total_seconds = total_seconds.total_seconds()
+            # Assume expiration_time is already a timedelta
+            total_seconds = expiration_time.total_seconds()
+
+        # Ensure total_seconds is positive
+        total_seconds = max(0, int(total_seconds))
+
+        # Serialize session data
         val = self.serializer.dumps(dict(session))
-        # Use the corrected `setex` method
-        self.redis.setex(self.key_prefix + session.sid, int(total_seconds), val)
+
+        # Use corrected setex method
+        self.redis.setex(self.key_prefix + session.sid, total_seconds, val)
 
 # Configure the app to use the patched Redis session interface
 app.session_interface = PatchedRedisSessionInterface(redis_instance, key_prefix)
