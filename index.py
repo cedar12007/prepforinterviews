@@ -152,6 +152,7 @@ class PatchedRedisSessionInterface(RedisSessionInterface):
         if not session.modified:
             return
 
+        # Get expiration time
         expiration_time = self.get_expiration_time(app, session)
 
         if expiration_time is None:
@@ -166,10 +167,13 @@ class PatchedRedisSessionInterface(RedisSessionInterface):
 
         total_seconds = max(0, int(total_seconds))
 
-        # Serialize session data
+        # Serialize session data as bytes (avoid JSON serialization)
         val = self.serializer.dumps(dict(session))
 
-        # Correctly call setex with positional arguments
+        print(f"Serialized Value Type: {type(val)}")
+        print(f"Serialized Value: {val}")
+
+        # Directly store bytes in Redis without converting to JSON
         self.redis.setex(self.key_prefix + session.sid, total_seconds, val)
 
 # Configure the app to use the patched Redis session interface
