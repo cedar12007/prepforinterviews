@@ -6,48 +6,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_session import Session
+from redis import Redis
 import time
-from upstash_redis import Redis as UpstashRedis
-
-class RedisWrapper:
-    def __init__(self, redis_instance):
-        self.redis = redis_instance
-
-    def set(self, name, value, ex=None, px=None, nx=False, xx=False):
-        """
-        Set a key with optional expiration and conditions.
-        - ex: Expiration time in seconds (convert to milliseconds for Upstash).
-        - px: Expiration time in milliseconds.
-        - nx: Set if not exists.
-        - xx: Set if exists.
-        """
-        # Convert ex (seconds) to milliseconds for Upstash if provided
-        expiration = px or (ex * 1000 if ex else None)
-        self.redis.set(name, value, px=expiration)
-
-    def setex(self, name, time, value):
-        """Set a key with an expiration in seconds."""
-        self.redis.set(name, value, px=time * 1000)  # Convert seconds to milliseconds
-
-    def get(self, name):
-        """Get the value of a key."""
-        return self.redis.get(name)
-
-    def delete(self, name):
-        """Delete a key."""
-        self.redis.delete(name)
-
-    def exists(self, name):
-        """Check if a key exists."""
-        return self.redis.exists(name)
-
-    def expire(self, name, time):
-        """Set a key's expiration in seconds."""
-        self.redis.expire(name, time)
-
-    def ttl(self, name):
-        """Get the remaining time to live for a key."""
-        return self.redis.ttl(name)
 
 
 app = Flask(__name__)
@@ -64,6 +24,7 @@ GMAIL_PASSWORD = os.getenv("doar_sisma")
 REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
+REDIS_PY_URL=os.getenv("redis_py_url") #redis://...
 
 print("Redis: " + str(REDIS_URL) + " and " + str(REDIS_TOKEN))
 
@@ -79,10 +40,8 @@ app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-
-# Initialize Upstash Redis and wrap it
-upstash_redis = UpstashRedis(url=REDIS_URL, token=REDIS_TOKEN)
-app.config["SESSION_REDIS"] = RedisWrapper(upstash_redis)
+#app.config["SESSION_REDIS"] = Redis(url=REDIS_URL, token=REDIS_TOKEN)
+app.config["SESSION_REDIS"] = Redis.from_url("redis://"+str(REDIS_PY_URL), password=REDIS_TOKEN)
 
 # Initialize Flask-Session extension
 Session(app)
