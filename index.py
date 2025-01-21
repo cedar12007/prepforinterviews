@@ -82,14 +82,14 @@ def validate_captcha():
             "response": recaptcha_response,
         },
     )
-    result = response.json()
+    recaptcha_result = response.json()
 
-    print("results: " + str(result))
+    print("results: " + str(recaptcha_result))
 
     if result.get("success"):
         # Send an email with the form data
         try:
-            send_email(name, email, message, recaptcha_response)
+            send_email(name, email, message, recaptcha_result)
             return jsonify({"success": True, "message": "CAPTCHA validation and email successful."})
         except Exception as e:
             print(f"Error sending email: {e}")
@@ -100,7 +100,7 @@ def validate_captcha():
 
 
 
-def send_email(name, email, message, recaptcha_response):
+def send_email(name, email, message, recaptcha_result):
     """
     Sends an email containing the form data and reCAPTCHA response.
     """
@@ -113,8 +113,8 @@ def send_email(name, email, message, recaptcha_response):
     Email: {email}
     Message: {message}
 
-    reCAPTCHA Response:
-    {recaptcha_response}
+    reCAPTCHA Result:
+    {recaptcha_result}
     """
 
     # Set up the email message
