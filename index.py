@@ -6,8 +6,22 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_session import Session
-from upstash_redis import Redis
 import time
+from upstash_redis import Redis as UpstashRedis
+
+class RedisWrapper:
+    def __init__(self, redis_instance):
+        self.redis = redis_instance
+
+    def setex(self, name, time, value):
+        # Upstash uses `set` with `px` (milliseconds) for expiration
+        self.redis.set(name, value, px=time * 1000)
+
+    def delete(self, name):
+        self.redis.delete(name)
+
+    def get(self, name):
+        return self.redis.get(name)
 
 
 app = Flask(__name__)
@@ -39,7 +53,10 @@ app.config["SESSION_TYPE"] = "redis"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-app.config["SESSION_REDIS"] = Redis(url=REDIS_URL, token=REDIS_TOKEN)
+
+# Initialize Upstash Redis and wrap it
+upstash_redis = UpstashRedis(url=REDIS_URL, token=REDIS_TOKEN)
+app.config["SESSION_REDIS"] = RedisWrapper(upstash_redis)
 
 # Initialize Flask-Session extension
 Session(app)
