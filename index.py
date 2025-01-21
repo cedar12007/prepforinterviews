@@ -32,8 +32,8 @@ redis_client = Redis(
     token=REDIS_TOKEN)
 
 # Maximum allowed submissions per IP within the time window
-MAX_SUBMISSIONS = 2
-TIME_WINDOW = 60   # 1 minutes in seconds
+MAX_SUBMISSIONS = 3
+TIME_WINDOW = 60 * 5  # 5 minutes in seconds
 
 @app.route("/validate-captcha", methods=["POST"])
 def validate_captcha():
@@ -54,7 +54,7 @@ def validate_captcha():
     # Track submissions per session
     if ip_record == None:
         print("ip_record doesn't exist")
-        redis_client.set(ip_address, "0-" + str(current_time))
+        redis_client.set(ip_address, "1-" + str(current_time))
     else:
         attempt_count = int(ip_record[0])
         split_string = ip_record.split("-")  # Split by the hyphen
@@ -66,7 +66,7 @@ def validate_captcha():
         print("time_difference: " + str(time_elapsed))
         if time_elapsed > TIME_WINDOW:
             print("time elapsed, setting ip_address record to zero")
-            redis_client.set(ip_address, "0-" + str(current_time))
+            redis_client.set(ip_address, "1-" + str(current_time))
         elif attempt_count <= MAX_SUBMISSIONS:
             redis_client.set(ip_address, str(attempt_count + 1) + "-" + time_stamps + "-" + str(current_time))
             print("time didn't elapse, add another timestamp.  New record value: " + str(redis_client.get(ip_address)))
