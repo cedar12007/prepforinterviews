@@ -90,12 +90,12 @@ def validate_captcha():
         # Send an email with the form data
         try:
             send_email(name, email, message, recaptcha_result)
-            return jsonify({"success": True, "message": "CAPTCHA validation and email successful."})
+            return jsonify({"success": True, "message": "Thank you for your message!  You will be contacted shortly."})
         except Exception as e:
             print(f"Error sending email: {e}")
-            return jsonify({"success": False, "message": "CAPTCHA validated but email failed."}), 500
+            return jsonify({"success": False, "message": "Submission failed."}), 500
     else:
-        return jsonify({"success": False, "message": "CAPTCHA validation failed."}), 400
+        return jsonify({"success": False, "message": "Submission validation failed. Please try again later"}), 400
 
 
 
