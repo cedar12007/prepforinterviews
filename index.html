@@ -215,10 +215,10 @@
 								  const result = await response.json();
 
 								  if (result.success) {
-									alert("Form submitted successfully!");
+									alert(result.message);
 									document.getElementById("contactForm").reset();
 								  } else {
-									alert("CAPTCHA validation failed. Please try again.");
+									alert(result.message);
 								  }
 								} catch (error) {
 								  console.error("Error:", error);
