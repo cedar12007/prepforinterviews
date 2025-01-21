@@ -86,7 +86,7 @@ def validate_captcha():
 
     print("results: " + str(recaptcha_result))
 
-    if result.get("success"):
+    if recaptcha_result.get("success"):
         # Send an email with the form data
         try:
             send_email(name, email, message, recaptcha_result)
