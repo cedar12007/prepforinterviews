@@ -14,14 +14,32 @@ class RedisWrapper:
         self.redis = redis_instance
 
     def setex(self, name, time, value):
-        # Upstash uses `set` with `px` (milliseconds) for expiration
-        self.redis.set(name, value, px=time * 1000)
+        """Set a key with an expiration in seconds."""
+        self.redis.set(name, value, px=time * 1000)  # px (milliseconds)
 
-    def delete(self, name):
-        self.redis.delete(name)
+    def set(self, name, value):
+        """Set a key without expiration."""
+        self.redis.set(name, value)
 
     def get(self, name):
+        """Get the value of a key."""
         return self.redis.get(name)
+
+    def delete(self, name):
+        """Delete a key."""
+        self.redis.delete(name)
+
+    def exists(self, name):
+        """Check if a key exists."""
+        return self.redis.exists(name)
+
+    def expire(self, name, time):
+        """Set a key's expiration in seconds."""
+        self.redis.expire(name, time)
+
+    def ttl(self, name):
+        """Get the remaining time to live for a key."""
+        return self.redis.ttl(name)
 
 
 app = Flask(__name__)
