@@ -13,13 +13,21 @@ class RedisWrapper:
     def __init__(self, redis_instance):
         self.redis = redis_instance
 
+    def set(self, name, value, ex=None, px=None, nx=False, xx=False):
+        """
+        Set a key with optional expiration and conditions.
+        - ex: Expiration time in seconds (convert to milliseconds for Upstash).
+        - px: Expiration time in milliseconds.
+        - nx: Set if not exists.
+        - xx: Set if exists.
+        """
+        # Convert ex (seconds) to milliseconds for Upstash if provided
+        expiration = px or (ex * 1000 if ex else None)
+        self.redis.set(name, value, px=expiration)
+
     def setex(self, name, time, value):
         """Set a key with an expiration in seconds."""
-        self.redis.set(name, value, px=time * 1000)  # px (milliseconds)
-
-    def set(self, name, value):
-        """Set a key without expiration."""
-        self.redis.set(name, value)
+        self.redis.set(name, value, px=time * 1000)  # Convert seconds to milliseconds
 
     def get(self, name):
         """Get the value of a key."""
