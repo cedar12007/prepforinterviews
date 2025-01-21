@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_session import Session
-from redis import Redis
+from upstash_redis import Redis
 import time
 
 
@@ -24,31 +24,16 @@ GMAIL_PASSWORD = os.getenv("doar_sisma")
 REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
-REDIS_PY_URL=os.getenv("redis_py_url") #redis://...
+#REDIS_PY_URL=os.getenv("redis_py_url") #redis://...
 
-print("Redis: " + str(REDIS_URL) + " and " + str(REDIS_TOKEN))
 
-# redis_client = Redis(
-#     url=REDIS_URL,  # Replace with your Upstash Redis URL
-#     token=REDIS_TOKEN             # Replace with your Upstash token
-# )
-#
-# print("redis_client: " + str(redis_client))
-
-# Configure Redis session management
-app.config["SESSION_TYPE"] = "redis"
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_USE_SIGNER"] = True
-app.config["SESSION_KEY_PREFIX"] = "rate_limiting:"  # Optional, used to prefix session keys
-#app.config["SESSION_REDIS"] = Redis(url=REDIS_URL, token=REDIS_TOKEN)
-app.config["SESSION_REDIS"] = Redis.from_url("redis://"+str(REDIS_PY_URL), password=REDIS_TOKEN)
-
-# Initialize Flask-Session extension
-Session(app)
+redis_client = Redis(
+    url=REDIS_URL,
+    token=REDIS_TOKEN)
 
 # Maximum allowed submissions per IP within the time window
 MAX_SUBMISSIONS = 2
-TIME_WINDOW = 60 * 5  # 5 minutes in seconds
+TIME_WINDOW = 60   # 1 minutes in seconds
 
 @app.route("/validate-captcha", methods=["POST"])
 def validate_captcha():
@@ -62,24 +47,32 @@ def validate_captcha():
     ip_address = request.remote_addr  # Get the user's IP address
     recaptcha_response = request.json.get("g-recaptcha-response")
 
-    # Track submissions per session
-    if ip_address not in session:
-        session[ip_address] = {"count": 0, "timestamp": time.time()}
-
+    ip_record = redis_client.get(ip_address)
+    print("ip_record: " + str(ip_record))
     current_time = time.time()
-    time_elapsed = current_time - session[ip_address]["timestamp"]
 
-    # Reset the count if the time window has passed
-    if time_elapsed > TIME_WINDOW:
-        session[ip_address]["count"] = 0
-        session[ip_address]["timestamp"] = current_time
-
-    # Check if the IP has exceeded the submission limit
-    if session[ip_address]["count"] >= MAX_SUBMISSIONS:
-        return jsonify({"success": False, "message": "Rate limit exceeded. Please try again later."}), 429
-
-    # Increment the submission count for this IP address
-    session[ip_address]["count"] += 1
+    # Track submissions per session
+    if ip_record == None:
+        print("ip_record doesn't exist")
+        redis_client.set(ip_address, "0-" + str(current_time))
+    else:
+        attempt_count = int(ip_record[0])
+        split_string = ip_record.split("-")  # Split by the hyphen
+        first_attempt = split_string[1]  # Access the second element (the first timestamp)
+        time_stamps = ip_record[ip_record.find("-") + 1:]  # Slice everything after the first hyphen
+        print("attempt count: " + str(attempt_count))
+        print("first_attempt: " + first_attempt)
+        time_elapsed = current_time - float(first_attempt)
+        print("time_difference: " + str(time_elapsed))
+        if time_elapsed > TIME_WINDOW:
+            print("time elapsed, setting ip_address record to zero")
+            redis_client.set(ip_address, "0-" + str(current_time))
+        elif attempt_count <= MAX_SUBMISSIONS:
+            redis_client.set(ip_address, str(attempt_count + 1) + "-" + time_stamps + "-" + str(current_time))
+            print("time didn't elapse, add another timestamp.  New record value: " + str(redis_client.get(ip_address)))
+        else:
+            print("Submission limit exceeded. Please try again later.")
+            return jsonify({"success": False, "message": "Submission limit exceeded. Please try again later."}), 429
 
     # Verify reCAPTCHA response
     response = requests.post(
