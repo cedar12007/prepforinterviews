@@ -25,7 +25,35 @@ section, summary, time, mark, audio, video {
 	font: inherit;
 	color: white;
 	vertical-align: baseline;
-	}
+	text-shadow: 2px 2px 5px gray, -2px -2px 5px #357ae8;
+}
+
+ #interview_prep.major {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+ #interview_prep.major button {
+    margin: 15px;
+    padding-top: 0px;
+ }
+
+/* Style the print button */
+#printButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Button hover effect */
+#printButton:hover {
+    background-color: #0056b3;
+}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -97,7 +125,7 @@ input, select, textarea {
 	}
 
 	*, *:before, *:after {
-		/*box-sizing: inherit;*/
+		box-sizing: inherit;
 	}
 
 
@@ -171,7 +199,7 @@ input, select, textarea {
 	}
 
 	p {
-		margin: 0 0 2em 0;
+		margin: 0 0 1em 0;
 	}
 
 		p.content {
@@ -2616,9 +2644,7 @@ input, select, textarea {
 		text-align: center;
 	}
 
-	header.major {
-		margin-bottom: 3em;
-	}
+
 
 		header.major h2 {
 			font-size: 2em;
@@ -3319,8 +3345,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		font-size: 1.2em;
-		font-weight: normal;
+		font-size: 1.1em;
 		border-radius: 0.25em;
 	}
 
@@ -3436,7 +3461,6 @@ input, select, textarea {
 				background-color: white;
 				border-color: #dddddd;
 				width: 80%;
-				margin-left: 30px;
 		}
 
 		#main button, #main label {
@@ -3600,9 +3624,7 @@ input, select, textarea {
 
 		@media screen and (max-width: 1280px) {
 
-			#main > .main {
-				padding: 4em 4em 2em 4em ;
-			}
+
 
 				#main > .main > .image.main:first-child {
 					margin: -4em 0 4em -4em;
@@ -3613,9 +3635,7 @@ input, select, textarea {
 
 		@media screen and (max-width: 980px) {
 
-			#main > .main {
-				padding: 4em 3em 2em 3em ;
-			}
+
 
 				#main > .main > .image.main:first-child {
 					margin: -4em 0 4em -3em;
@@ -3796,7 +3816,3 @@ input, select, textarea {
 		}
 
 
-		#contact {
-			width:60%
-			
-		}
