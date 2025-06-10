@@ -25,7 +25,7 @@ section, summary, time, mark, audio, video {
 	font: inherit;
 	color: white;
 	vertical-align: baseline;
-	text-shadow: 2px 2px 5px gray, -2px -2px 5px #357ae8;
+	/*text-shadow: 2px 2px 5px gray, -2px -2px 5px #357ae8;*/
 }
 
  #interview_prep.major {
@@ -3708,3 +3708,154 @@ input[type="checkbox"] {
 label{
     cursor:pointer;
 }
+
+
+
+	 .pricing-item {
+                display: flex;
+                /* justify-content: space-between; */
+                align-items: center;
+                padding: 10px 0;
+                flex-direction: row;
+                border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+       .pricing-item:first-child {
+            border-top: none; /* No top border for the first item */
+        }
+
+       .pricing-description {
+            text-align: left;
+            flex: 1;
+            padding-right: 20px;
+        }
+
+         .pricing-cost-comment {
+            margin-left: 20px;
+            white-space: nowrap;
+            color: red;
+            background-color: rgba(255, 255, 0, 0.6);
+            padding: 0 12px;
+            font-weight: 700;
+        }
+
+        .pricing-comment {
+           padding-bottom: 20px;
+
+        }
+       .pricing-description strong {
+            font-size: 1.1em;
+            font-weight: 700;
+            display: block;
+            white-space: nowrap;
+
+        }
+
+       .pricing-description span {
+            font-size: 0.9em;
+            font-weight: 400;
+            display: block;
+            line-height: 1.3;
+        }
+
+       .pricing-cost-old {
+            font-size: 1.4em;
+            font-weight: 700;
+            position: relative;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+
+       .pricing-cost-old::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 80%; /* Height of the vertical line */
+            width: 1px;
+            background-color: var(--text-white);
+                content: '';
+            font-weight: 700;
+            text-align: right;
+            /* min-width: 150px; */
+            position: relative;
+            /* padding-left: 20px; */
+            align-items: flex-start;
+
+
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background-color: red;
+                transform-origin: center center;
+                transform: translateY(-50%) rotate(-15deg);
+        }
+
+        .section-pricing {
+        	width: 70%
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+           .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .section-pricing {
+        	width: 100%
+        	}
+
+           .the-process-label {
+                position: static;
+                transform: none;
+                text-align: center;
+                font-size: 50px;
+                margin-bottom: 20px;
+                padding: 0;
+            }
+
+           .content-area {
+                padding: 0;
+            }
+
+           .process-step-box {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+           .process-step-time {
+                margin-right: 0;
+                margin-bottom: 5px;
+                min-width: unset;
+            }
+
+           .pricing-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+           .pricing-description {
+                padding-right: 0;
+                margin-bottom: 10px;
+            }
+
+           .pricing-cost {
+                text-align: left;
+                min-width: unset;
+                padding-left: 0;
+            }
+
+           .pricing-cost::before {
+                display: none; /* Hide vertical line on smaller screens */
+            }
+
+
+        .pricing-cost-comment {
+            margin-left: 0px;
+            white-space: wrap;
