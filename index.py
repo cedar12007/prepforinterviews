@@ -21,15 +21,24 @@ RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
 GMAIL_USER = os.getenv("doar_ktovet")
 GMAIL_PASSWORD = os.getenv("doar_sisma")
 
+REDIS_ENABLED = os.getenv("redis_enabled")
 REDIS_TOKEN = os.getenv("redis_token")
 REDIS_URL = os.getenv("redis_url")
 REDIS_PORT = os.getenv("redis_port")
+
 #REDIS_PY_URL=os.getenv("redis_py_url") #redis://...
 
+if REDIS_ENABLED is None:
+    REDIS_ENABLED = "false"
 
-redis_client = Redis(
-    url=REDIS_URL,
-    token=REDIS_TOKEN)
+redis_enabled = (REDIS_ENABLED.lower() == "true")
+
+if not redis_enabled:
+    print("Redis is DISABLED")
+else:
+    redis_client = Redis(
+        url=REDIS_URL,
+        token=REDIS_TOKEN)
 
 # Maximum allowed submissions per IP within the time window
 MAX_SUBMISSIONS = 3
@@ -47,32 +56,33 @@ def validate_captcha():
     ip_address = request.remote_addr  # Get the user's IP address
     recaptcha_response = request.json.get("g-recaptcha-response")
 
-    ip_record = redis_client.get(ip_address)
-    print("ip_record: " + str(ip_record))
-    current_time = time.time()
+    if redis_enabled:
+        ip_record = redis_client.get(ip_address)
+        print("ip_record: " + str(ip_record))
+        current_time = time.time()
 
-    # Track submissions per session
-    if ip_record == None:
-        print("ip_record doesn't exist")
-        redis_client.set(ip_address, "1-" + str(current_time))
-    else:
-        attempt_count = int(ip_record[0])
-        split_string = ip_record.split("-")  # Split by the hyphen
-        first_attempt = split_string[1]  # Access the second element (the first timestamp)
-        time_stamps = ip_record[ip_record.find("-") + 1:]  # Slice everything after the first hyphen
-        print("attempt count: " + str(attempt_count))
-        print("first_attempt: " + first_attempt)
-        time_elapsed = current_time - float(first_attempt)
-        print("time_difference: " + str(time_elapsed))
-        if time_elapsed > TIME_WINDOW:
-            print("time elapsed, setting ip_address record to zero")
+        # Track submissions per session
+        if ip_record == None:
+            print("ip_record doesn't exist")
             redis_client.set(ip_address, "1-" + str(current_time))
-        elif attempt_count <= MAX_SUBMISSIONS:
-            redis_client.set(ip_address, str(attempt_count + 1) + "-" + time_stamps + "-" + str(current_time))
-            print("time didn't elapse, add another timestamp.  New record value: " + str(redis_client.get(ip_address)))
         else:
-            print("Submission limit exceeded. Please try again later.")
-            return jsonify({"success": False, "message": "Submission limit exceeded. Please try again later."}), 429
+            attempt_count = int(ip_record[0])
+            split_string = ip_record.split("-")  # Split by the hyphen
+            first_attempt = split_string[1]  # Access the second element (the first timestamp)
+            time_stamps = ip_record[ip_record.find("-") + 1:]  # Slice everything after the first hyphen
+            print("attempt count: " + str(attempt_count))
+            print("first_attempt: " + first_attempt)
+            time_elapsed = current_time - float(first_attempt)
+            print("time_difference: " + str(time_elapsed))
+            if time_elapsed > TIME_WINDOW:
+                print("time elapsed, setting ip_address record to zero")
+                redis_client.set(ip_address, "1-" + str(current_time))
+            elif attempt_count <= MAX_SUBMISSIONS:
+                redis_client.set(ip_address, str(attempt_count + 1) + "-" + time_stamps + "-" + str(current_time))
+                print("time didn't elapse, add another timestamp.  New record value: " + str(redis_client.get(ip_address)))
+            else:
+                print("Submission limit exceeded. Please try again later.")
+                return jsonify({"success": False, "message": "Submission limit exceeded. Please try again later."}), 429
 
     # Verify reCAPTCHA response
     response = requests.post(
