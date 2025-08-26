@@ -3794,6 +3794,15 @@ label{
                 transform: translateY(-50%) rotate(-15deg);
         }
 
+        .pricing-cost {
+            font-size: 1.4em;
+            font-weight: 700;
+            position: relative;
+            padding-right: 200px;
+        }
+
+
+
         .section-pricing {
         	width: 70%
         }
