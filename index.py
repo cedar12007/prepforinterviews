@@ -17,7 +17,7 @@ app.secret_key = os.getenv("mafteah_sod")
 
 CORS(app, resources={r"/validate-captcha": {"origins": "https://www.prepforinterviews.com"}})
 
-RECAPTCHA_SECRET_KEY = "6LcXxroqAAAAAGeX9BkQ5oAxyKeeyoGPpesYUQkL"
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY")
 GMAIL_USER = os.getenv("doar_ktovet")
 GMAIL_PASSWORD = os.getenv("doar_sisma")
 
@@ -141,6 +141,15 @@ def send_email(name, email, message, recaptcha_result):
     msg["To"] = GMAIL_USER  # Send to your own email address
     msg["Subject"] = subject
     msg.attach(MIMEText(body, "plain"))
+
+    # Check if credentials are set (Bypass for local testing)
+    if not GMAIL_USER or not GMAIL_PASSWORD:
+        print("WARNING: Email credentials not set. Skipping email send.")
+        print("--- Email Content ---")
+        print(f"Subject: {subject}")
+        print(body)
+        print("---------------------")
+        return
 
     # Send the email using Gmail's SMTP server
     with smtplib.SMTP("smtp.gmail.com", 587) as server:

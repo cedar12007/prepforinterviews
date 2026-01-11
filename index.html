@@ -367,6 +367,39 @@
 					<script
 						src="https://www.google.com/recaptcha/api.js?render=6LcXxroqAAAAAFrK8ZrJMVAdk79U-6bscE9SIwf5"></script>
 					<script>
+						// Modal Elements
+						let modal, modalTitle, modalMessage, closeBtn, okBtn;
+
+						document.addEventListener("DOMContentLoaded", function () {
+							modal = document.getElementById("custom-modal");
+							modalTitle = document.getElementById("modal-title");
+							modalMessage = document.getElementById("modal-message");
+							closeBtn = document.querySelector(".modal-close");
+							okBtn = document.getElementById("modal-ok-btn");
+
+							if (closeBtn) closeBtn.onclick = closeModal;
+							if (okBtn) okBtn.onclick = closeModal;
+							window.onclick = function (event) {
+								if (event.target == modal) {
+									closeModal();
+								}
+							}
+						});
+
+						function showModal(title, message) {
+							if (modal && modalTitle && modalMessage) {
+								modalTitle.textContent = title;
+								modalMessage.textContent = message;
+								modal.classList.add("show");
+							}
+						}
+
+						function closeModal() {
+							if (modal) {
+								modal.classList.remove("show");
+							}
+						}
+
 						document.getElementById("contactForm").addEventListener("submit", async function (e) {
 							e.preventDefault(); // Prevent form submission
 
@@ -381,7 +414,7 @@
 
 								// Send data to the back-end
 								try {
-									const response = await fetch("https://prepforinterviews.vercel.app/validate-captcha", {
+									const response = await fetch("/validate-captcha", {
 										method: "POST",
 										headers: {
 											"Content-Type": "application/json",
@@ -392,14 +425,14 @@
 									const result = await response.json();
 
 									if (result.success) {
-										alert(result.message);
+										showModal("Success!", result.message);
 										document.getElementById("contactForm").reset();
 									} else {
-										alert(result.message);
+										showModal("Error", result.message);
 									}
 								} catch (error) {
 									console.error("Error:", error);
-									alert("There was an error submitting the form.");
+									showModal("Error", "There was an error submitting the form.");
 								}
 							});
 						});
@@ -433,6 +466,16 @@
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer> -->
 
+	</div>
+
+	<!-- Custom Modal -->
+	<div id="custom-modal">
+		<div class="modal-content">
+			<span class="modal-close">&times;</span>
+			<h2 id="modal-title">Notification</h2>
+			<p id="modal-message">Message goes here.</p>
+			<button id="modal-ok-btn">OK</button>
+		</div>
 	</div>
 
 	<!-- Scripts -->
