@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, render_template, send_from_directory
 from flask_cors import CORS  # Import CORS library
 import requests
 import os
@@ -10,7 +10,7 @@ from upstash_redis import Redis
 import time
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', template_folder='.')
 
 app.secret_key = os.getenv("mafteah_sod")
 
@@ -43,6 +43,14 @@ else:
 # Maximum allowed submissions per IP within the time window
 MAX_SUBMISSIONS = 3
 TIME_WINDOW = 60 * 5  # 5 minutes in seconds
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/<path:path>")
+def static_files(path):
+    return send_from_directory(".", path)
 
 @app.route("/validate-captcha", methods=["POST"])
 def validate_captcha():
@@ -142,4 +150,4 @@ def send_email(name, email, message, recaptcha_result):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5005)

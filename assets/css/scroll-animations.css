@@ -1,0 +1,131 @@
+/* --- Scroll Reveal Animations --- */
+
+/* Base transition for all sections */
+#main>section {
+    transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+}
+
+/* Inactive state (when outside viewport) */
+#main>section.inactive {
+    opacity: 0 !important;
+    transform: translateY(50px) !important;
+    visibility: hidden !important;
+}
+
+/* Staggered entry for children within sections */
+#main>section>.content,
+#main>section>.spotlight,
+#main>section>header,
+#main>section>ul,
+#main>section>form {
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    transition-delay: 0.3s !important;
+}
+
+#main>section.inactive>.content,
+#main>section.inactive>.spotlight,
+#main>section.inactive>header,
+#main>section.inactive>ul,
+#main>section.inactive>form {
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+}
+
+/* Special Reveal: Spotlight Images */
+#main>section.spotlight .image {
+    transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    transition-delay: 0.5s !important;
+}
+
+#main>section.inactive.spotlight .image {
+    opacity: 0 !important;
+    transform: scale(0.9) translateX(30px) !important;
+}
+
+/* Special Reveal: Profile Pic (About Me) */
+#about_me.spotlight .image {
+    transition-delay: 0.4s !important;
+}
+
+#about_me.inactive.spotlight .image {
+    transform: scale(0.9) translateX(-30px) !important;
+}
+
+/* Navigation Smoothness */
+#nav {
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease !important;
+}
+
+/* Testimonial Slider Reveal */
+.testimonials-slider {
+    transition: opacity 1s ease, transform 1s ease !important;
+    transition-delay: 0.4s !important;
+}
+
+#testimonials.inactive .testimonials-slider {
+    opacity: 0 !important;
+    transform: scale(0.98) !important;
+}
+
+/* --- List Item Reveal (Staggered) --- */
+#main section ul li,
+#main section ol li {
+    transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+/* Inactive state for list items */
+#main section.inactive ul li,
+#main section.inactive ol li {
+    opacity: 0 !important;
+    transform: translateX(-15px) !important;
+}
+
+/* Staggered delays for list items */
+#main section ul li:nth-child(1),
+#main section ol li:nth-child(1) {
+    transition-delay: 0.2s !important;
+}
+
+#main section ul li:nth-child(2),
+#main section ol li:nth-child(2) {
+    transition-delay: 0.3s !important;
+}
+
+#main section ul li:nth-child(3),
+#main section ol li:nth-child(3) {
+    transition-delay: 0.4s !important;
+}
+
+#main section ul li:nth-child(4),
+#main section ol li:nth-child(4) {
+    transition-delay: 0.5s !important;
+}
+
+#main section ul li:nth-child(5),
+#main section ol li:nth-child(5) {
+    transition-delay: 0.6s !important;
+}
+
+/* --- Interactive Hover Effects --- */
+
+/* Image zoom on hover */
+.image img {
+    transition: transform 0.5s ease !important;
+}
+
+.image:hover img {
+    transform: scale(1.03) !important;
+}
+
+/* Button pulse on hover */
+.button.primary {
+    transition: all 0.3s ease !important;
+}
+
+.button.primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+}

@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4e84e388-099a-41da-984f-aac358f18aad" name="Changes" comment="updated cost to prior to summer prices" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="main" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2rjnNcYha3lW6QuXjLGC8c1OdJF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Properties" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.index">
+    <configuration name="index" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="prepforinterviews" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/index.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="redis_Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="prepforinterviews" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/redis_Test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="redis_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="prepforinterviews" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/redis_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="redit_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="prepforinterviews" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/redit_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="verify_recaptcha" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="prepforinterviews" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/verify_recaptcha.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.index" />
+        <item itemvalue="Python.redis_test" />
+        <item itemvalue="Python.redis_Test" />
+        <item itemvalue="Python.redit_test" />
+        <item itemvalue="Python.verify_recaptcha" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e84e388-099a-41da-984f-aac358f18aad" name="Changes" comment="" />
+      <created>1737081313296</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737081313296</updated>
+    </task>
+    <task id="LOCAL-00048" summary="updating requirements.txt">
+      <created>1737144303022</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1737144303022</updated>
+    </task>
+    <task id="LOCAL-00049" summary="importing session">
+      <created>1737144748105</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1737144748105</updated>
+    </task>
+    <task id="LOCAL-00050" summary="fixing session typo">
+      <created>1737144900680</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1737144900681</updated>
+    </task>
+    <task id="LOCAL-00051" summary="updated Redis connection">
+      <created>1737145396769</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1737145396769</updated>
+    </task>
+    <task id="LOCAL-00052" summary="added addedupstash-redis==1.0.0 to requirements.txt">
+      <created>1737145783794</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1737145783795</updated>
+    </task>
+    <task id="LOCAL-00053" summary="changing redis connection string">
+      <created>1737146736208</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1737146736208</updated>
+    </task>
+    <task id="LOCAL-00054" summary="changing redis connection string, changing port">
+      <created>1737147285061</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1737147285061</updated>
+    </task>
+    <task id="LOCAL-00055" summary="dummy commit">
+      <created>1737148038981</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1737148038981</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Troubleshooting redis">
+      <created>1737149537050</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1737149537051</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Troubleshooting redis">
+      <created>1737149763208</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1737149763209</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Troubleshooting redis">
+      <created>1737150070742</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1737150070743</updated>
+    </task>
+    <task id="LOCAL-00059" summary="modifying requets object in requirements.txt">
+      <created>1737150269236</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1737150269236</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Troubleshooting">
+      <created>1737150720318</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1737150720318</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Changing redis version is requirements">
+      <created>1737410218551</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1737410218551</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Monkey Patch Flask-Session: If you don't want to modify the library code directly, you can apply a monkey patch">
+      <created>1737411127157</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1737411127157</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Monkey patch - fixing datetime error">
+      <created>1737411291125</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1737411291125</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Monkey patch - another attempt to fix datetime error (ERROR:index:Request finalizing failed with an error while handling an error)">
+      <created>1737411468573</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1737411468573</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Fixing From File &quot;/var/task/index.py&quot;, line 178, in save_session&#10;    self.redis.setex(self.key_prefix + session.sid, total_seconds, val)&#10;&#10;Getting &#10;File &quot;/var/lang/lib/python3.12/json/encoder.py&quot;, line 180, in default&#10;    raise TypeError(f'Object of type {o.__class__.__name__} '&#10;TypeError: Object of type bytes is not JSON serializable&#10;ERROR:index:Request finalizing failed with an error while handling an error">
+      <created>1737411670621</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1737411670621</updated>
+    </task>
+    <task id="LOCAL-00066" summary="fixing decode(&quot;utf-8&quot;) error">
+      <created>1737411920072</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1737411920072</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Using Positional Arguments for setex(): The correct call to setex() does not use the name= keyword. Instead, it passes the arguments in order: the key, the expiration time (in seconds), and the value.">
+      <created>1737412169211</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1737412169211</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Update the save_session method to store bytes directly in Redis:">
+      <created>1737412372168</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1737412372168</updated>
+    </task>
+    <task id="LOCAL-00069" summary="The serialized value is indeed in bytes format, as expected, and looks like a pickle-serialized object. Redis can handle binary data directly, but you are encountering the issue because your Redis client (Upstash Redis) is expecting data in a JSON-compatible format.">
+      <created>1737412577465</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1737412577465</updated>
+    </task>
+    <task id="LOCAL-00070" summary="ensuring that Flask-Session and Upstash Redis work together without encountering JSON serialization issues.">
+      <created>1737412820955</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1737412820955</updated>
+    </task>
+    <task id="LOCAL-00071" summary="REVERTING TO VERSION PRIOR TO MONKEY PATCH">
+      <created>1737412930775</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1737412930775</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Trying to update requirements.txt">
+      <created>1737434365163</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1737434365163</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Custom Compatibility Layer&#10;If you need to use upstash-redis, you can create a thin wrapper to adapt it to redis-py’s interface so Flask-Session can work seamlessly.">
+      <created>1737434627185</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1737434627186</updated>
+    </task>
+    <task id="LOCAL-00074" summary="AttributeError: 'RedisWrapper' object has no attribute 'set'. Did you mean: 'get'?&#10;ERROR:index:Request finalizing failed with an error while handling an error&#10;ChatGPT said:&#10;ChatGPT&#10;The RedisWrapper implementation is missing a set method, which is being invoked by Flask-Session">
+      <created>1737434773683</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1737434773683</updated>
+    </task>
+    <task id="LOCAL-00075" summary="ile &quot;/var/task/flask_session/sessions.py&quot;, line 209, in save_session&#10;    self.redis.set(&#10;TypeError: RedisWrapper.set() got an unexpected keyword argument 'ex'&#10;ERROR:index:Request finalizing failed with an error while handling an error&#10;ChatGPT said:&#10;ChatGPT&#10;The error indicates that Flask-Session is attempting to use the set method with the ex keyword argument (expiration in seconds), which our RedisWrapper implementation does not handle. To fix this, we need to update the set method in RedisWrapper to accept and handle the ex argument correctly.">
+      <created>1737434910468</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1737434910468</updated>
+    </task>
+    <task id="LOCAL-00076" summary="If you want to use Flask-Session without modification, you should use the redis-py library (redis package) instead of upstash-redis">
+      <created>1737435580084</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1737435580084</updated>
+    </task>
+    <task id="LOCAL-00077" summary="To resolve the distutils issue and ensure your application dependencies are properly installed, your requirements.txt file should be updated">
+      <created>1737435865100</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1737435865100</updated>
+    </task>
+    <task id="LOCAL-00078" summary="implementing direct communication with redis without session">
+      <created>1737440512301</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1737440512301</updated>
+    </task>
+    <task id="LOCAL-00079" summary="successfull redis implementation - setting the first attempt to 1 (previously set to zero)">
+      <created>1737440899035</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1737440899035</updated>
+    </task>
+    <task id="LOCAL-00080" summary="in the email sending recaptcha result, not the hex value">
+      <created>1737441120303</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1737441120303</updated>
+    </task>
+    <task id="LOCAL-00081" summary="fixing result typo">
+      <created>1737441248694</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1737441248695</updated>
+    </task>
+    <task id="LOCAL-00082" summary="changing alert messaging">
+      <created>1737441585147</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1737441585147</updated>
+    </task>
+    <task id="LOCAL-00083" summary="replacing alert messaging from client side to server side">
+      <created>1737441772494</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1737441772494</updated>
+    </task>
+    <task id="LOCAL-00084" summary="changing button text to white">
+      <created>1737442164806</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1737442164806</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Changing CSS to increase the size of the form fields">
+      <created>1737820106393</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1737820106393</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Added interview prep guide">
+      <created>1738557583541</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1738557583543</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Added free consultation">
+      <created>1740940604173</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1740940604174</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Added testimonials and instagram link">
+      <created>1741148685524</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1741148685525</updated>
+    </task>
+    <task id="LOCAL-00089" summary="instagram image">
+      <created>1741404443003</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1741404443004</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Converted cost image to text&#10;Offered Free service for high school students during the summer">
+      <created>1749574241455</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1749574241457</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Trying to fix recaptcha error">
+      <created>1750034702853</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1750034702854</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Reverting URL change">
+      <created>1750036463574</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1750036463574</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Made redis an env param, since it keeps tweeking">
+      <created>1752543719084</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1752543719085</updated>
+    </task>
+    <task id="LOCAL-00094" summary="updated cost to prior to summer prices">
+      <created>1756242593037</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1756242593039</updated>
+    </task>
+    <task id="LOCAL-00095" summary="updated cost to prior to summer prices">
+      <created>1756242992019</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1756242992019</updated>
+    </task>
+    <task id="LOCAL-00096" summary="updated cost to prior to summer prices">
+      <created>1756244753745</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1756244753746</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ensuring that Flask-Session and Upstash Redis work together without encountering JSON serialization issues." />
+    <MESSAGE value="REVERTING TO VERSION PRIOR TO MONKEY PATCH" />
+    <MESSAGE value="Trying to update requirements.txt" />
+    <MESSAGE value="Custom Compatibility Layer&#10;If you need to use upstash-redis, you can create a thin wrapper to adapt it to redis-py’s interface so Flask-Session can work seamlessly." />
+    <MESSAGE value="AttributeError: 'RedisWrapper' object has no attribute 'set'. Did you mean: 'get'?&#10;ERROR:index:Request finalizing failed with an error while handling an error&#10;ChatGPT said:&#10;ChatGPT&#10;The RedisWrapper implementation is missing a set method, which is being invoked by Flask-Session" />
+    <MESSAGE value="ile &quot;/var/task/flask_session/sessions.py&quot;, line 209, in save_session&#10;    self.redis.set(&#10;TypeError: RedisWrapper.set() got an unexpected keyword argument 'ex'&#10;ERROR:index:Request finalizing failed with an error while handling an error&#10;ChatGPT said:&#10;ChatGPT&#10;The error indicates that Flask-Session is attempting to use the set method with the ex keyword argument (expiration in seconds), which our RedisWrapper implementation does not handle. To fix this, we need to update the set method in RedisWrapper to accept and handle the ex argument correctly." />
+    <MESSAGE value="If you want to use Flask-Session without modification, you should use the redis-py library (redis package) instead of upstash-redis" />
+    <MESSAGE value="To resolve the distutils issue and ensure your application dependencies are properly installed, your requirements.txt file should be updated" />
+    <MESSAGE value="implementing direct communication with redis without session" />
+    <MESSAGE value="successfull redis implementation - setting the first attempt to 1 (previously set to zero)" />
+    <MESSAGE value="in the email sending recaptcha result, not the hex value" />
+    <MESSAGE value="fixing result typo" />
+    <MESSAGE value="changing alert messaging" />
+    <MESSAGE value="replacing alert messaging from client side to server side" />
+    <MESSAGE value="changing button text to white" />
+    <MESSAGE value="Changing CSS to increase the size of the form fields" />
+    <MESSAGE value="Added interview prep guide" />
+    <MESSAGE value="Added free consultation" />
+    <MESSAGE value="Added testimonials and instagram link" />
+    <MESSAGE value="instagram image" />
+    <MESSAGE value="Converted cost image to text&#10;Offered Free service for high school students during the summer" />
+    <MESSAGE value="Trying to fix recaptcha error" />
+    <MESSAGE value="Reverting URL change" />
+    <MESSAGE value="Made redis an env param, since it keeps tweeking" />
+    <MESSAGE value="updated cost to prior to summer prices" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated cost to prior to summer prices" />
+  </component>
+</project>

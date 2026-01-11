@@ -1,0 +1,158 @@
+/**
+ * Color Theme Override - White Background for Content Only
+ * Navigation and margins keep original blue theme
+ */
+
+/* Main content area - white background */
+#main {
+    background-color: #ffffff !important;
+}
+
+/* All text in main content area - black */
+#main,
+#main p,
+#main h1,
+#main h2,
+#main h3,
+#main h4,
+#main h5,
+#main h6,
+#main li,
+#main span,
+#main div,
+#main strong,
+#main b,
+#main i,
+#main em,
+#main label,
+#main td,
+#main th {
+    color: #000000 !important;
+}
+
+/* Links in main content */
+#main a {
+    color: #0066cc !important;
+}
+
+#main a:hover {
+    color: #004499 !important;
+}
+
+/* Input fields in main content */
+#main input,
+#main select,
+#main textarea {
+    color: #000000 !important;
+    background-color: #f5f5f5 !important;
+    border-color: #cccccc !important;
+}
+
+/* Sections within main */
+#main section {
+    background-color: transparent !important;
+}
+
+/* Testimonials slider in main content */
+#main .testimonials-slider {
+    background-color: transparent !important;
+}
+
+#main .testimonial-slide p {
+    color: #000000 !important;
+}
+
+#main .testimonial-author {
+    color: #333333 !important;
+}
+
+/* Slider controls for white background */
+#main .slider-btn {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-color: rgba(0, 0, 0, 0.3) !important;
+    color: #000000 !important;
+}
+
+#main .slider-btn:hover {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+#main .dot {
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+
+#main .dot:hover {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+#main .dot.active {
+    background: rgba(0, 0, 0, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Buttons in main content */
+#main button,
+#main .button {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+    border-color: #0066cc !important;
+}
+
+#main button:hover,
+#main .button:hover {
+    background-color: #004499 !important;
+    border-color: #004499 !important;
+}
+
+/* Submit button specifically */
+#main #submit_btn {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+}
+
+#main #submit_btn:hover {
+    background-color: #004499 !important;
+}
+
+/* Borders and dividers in main */
+#main hr {
+    border-bottom-color: #cccccc !important;
+}
+
+/* Code blocks in main */
+#main code {
+    background: #f5f5f5 !important;
+    border-color: #cccccc !important;
+    color: #000000 !important;
+}
+
+/* Blockquotes in main */
+#main blockquote {
+    border-left-color: #cccccc !important;
+    color: #333333 !important;
+}
+
+/* Pricing section in main */
+#main .section-pricing {
+    background-color: transparent !important;
+}
+
+#main .pricing-item {
+    background-color: #f8f8f8 !important;
+    color: #000000 !important;
+}
+
+#main .pricing-cost {
+    color: #0066cc !important;
+}
+
+#main .pricing-comment {
+    color: #666666 !important;
+}
+
+/* Lists in main */
+#main ul li,
+#main ol li {
+    color: #000000 !important;
+}
