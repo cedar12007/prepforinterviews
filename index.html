@@ -414,7 +414,7 @@
 
 								// Send data to the back-end
 								try {
-									const response = await fetch("/validate-captcha", {
+									const response = await fetch("https://prepforinterviews.vercel.app/validate-captcha", {
 										method: "POST",
 										headers: {
 											"Content-Type": "application/json",
